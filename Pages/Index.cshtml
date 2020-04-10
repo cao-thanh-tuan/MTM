@@ -1,0 +1,156 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+@section Scripts {
+    <environment names="Development">
+        <link rel="stylesheet" href="~/css/bootstrap.min.css">
+        <link rel="stylesheet" href="~/css/bootstrap-datetimepicker.min.css">
+
+        <script src="~/js/jquery-2.1.1.min.js"></script>
+        <script src="~/js/bootstrap.min.js"></script>
+        <script src="~/js/moment-with-locales.js"></script>
+        <script src="~/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="~/js/canvasjs.min.js"></script>
+        <script src="~/js/register.js"></script>
+    </environment>
+    <environment names="Production">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+
+        <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="//canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <script src="~/js/register.js"></script>
+    </environment>
+}
+
+<script type="text/javascript">
+    //<![CDATA[
+    $(document).ready(function () {
+        var DataPoints = @Html.Raw(Model.DataPoints);
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+	        title: {
+                fontFamily: "tahoma",
+                fontSize: 20,
+                text: "Biểu Đồ Đăng Ký Thiền Tại Gia"
+	        },
+	        axisY: {
+                titleFontFamily: "tahoma",
+                titleFontSize: 14,
+                title: "Số lượng đăng ký",
+	        },
+	        data: [{
+		        type: "column",
+		        dataPoints: DataPoints
+	        }]
+        });
+
+        chart.render();
+    });
+    //]]>
+</script>
+
+<h1 class="h5">Đăng ký thiền tại gia</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <input asp-for="RegistrationInfo.InitiateDate" hidden class="form-control" />
+            <input asp-for="RegistrationInfo.StartTime" hidden class="form-control" />
+            <input asp-for="RegistrationInfo.EndTime" hidden class="form-control" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RegistrationInfo.IdentitcationNumber" class="control-label">CMND</label>
+                <input asp-for="RegistrationInfo.IdentitcationNumber" class="form-control" />
+                <span asp-validation-for="RegistrationInfo.IdentitcationNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Năm Thọ Pháp</label>
+                <div class='input-group date' id='initiateYear'>
+                    <input type='text' readonly class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Tháng Thọ Pháp</label>
+                <div class='input-group date' id='initiateMonth'>
+                    <input type='text' readonly class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Đăng Ký Ngày Thiền</label>
+                <div class='input-group date' id='meditaionDate'>
+                    <input type='text' readonly class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Đăng Ký Giờ Bắt Đầu Thiền</label>
+                <div class='input-group date' id='startTime'>
+                    <input type='text' readonly class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Đăng Ký Giờ Kết Thúc Thiền</label>
+                <div class='input-group date' id='endTime'>
+                    <input type='text' readonly class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <input id="btnSubmit" type="submit" value="Đăng Ký" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <div class="col-md-1">
+            <div>&nbsp;</div>
+        </div>
+        <div class="col-md-7">
+            <div id="chartContainer" style="height: 450px; width: 100%;"></div>
+        </div>
+    </div>
+
+
+    @if (Model.IsSuccess)
+    {
+        <div class="container">
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title"></h4>
+                        </div>
+                        <div class="modal-body">
+                            <h4><p id="message">Đăng ký thiền tại gia thành công!</p></h4>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Đống</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }

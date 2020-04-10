@@ -1,0 +1,69 @@
+﻿@page
+@model MTM.Pages.Disciples.EditModel
+
+@{
+    ViewData["Title"] = "Edit Disciple";
+}
+
+<h1>Cập Nhật Thông Tin Đồng Tu</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Disciple.ID" />
+            <div class="form-group">
+                <label asp-for="Disciple.IdentitcationNumber" class="control-label"></label>
+                <input asp-for="Disciple.IdentitcationNumber" class="form-control" />
+                <span asp-validation-for="Disciple.IdentitcationNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Disciple.FirstName" class="control-label"></label>
+                <input asp-for="Disciple.FirstName" class="form-control" />
+                <span asp-validation-for="Disciple.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Disciple.MiddleName" class="control-label"></label>
+                <input asp-for="Disciple.MiddleName" class="form-control" />
+                <span asp-validation-for="Disciple.MiddleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Disciple.LastName" class="control-label"></label>
+                <input asp-for="Disciple.LastName" class="form-control" />
+                <span asp-validation-for="Disciple.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Disciple.Address" class="control-label"></label>
+                <input asp-for="Disciple.Address" class="form-control" />
+                <span asp-validation-for="Disciple.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Disciple.Gender" class="control-label"></label>
+                <input asp-for="Disciple.Gender" class="form-control" />
+                <span asp-validation-for="Disciple.Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Disciple.DateOfBirth" class="control-label"></label>
+                <input asp-for="Disciple.DateOfBirth" class="form-control" />
+                <span asp-validation-for="Disciple.DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Disciple.InitiateDate" class="control-label"></label>
+                <input asp-for="Disciple.InitiateDate" class="form-control" />
+                <span asp-validation-for="Disciple.InitiateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Cập Nhật" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Quay Về</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

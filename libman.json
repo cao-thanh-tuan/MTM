@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "eonasdan-bootstrap-datetimepicker@4.17.47",
+      "destination": "wwwroot/lib/datetimepicker/"
+    }
+  ,
+{
+  "library": "moment.js@2.24.0",
+  "destination": "wwwroot/lib/moment/",
+  "files": [
+    "moment-with-locales.min.js"
+  ]
+}
+]
+}
