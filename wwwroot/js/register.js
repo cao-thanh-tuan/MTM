@@ -2,7 +2,7 @@
     if ($('#myModal').length) {
         $('#myModal').modal('show');
 
-        $("#RegistrationInfo_IdentitcationNumber").val("");
+        $("#RegistrationInfo_Phone").val("");
     }
 
     var initialDate, startTime, endTime;

@@ -5,14 +5,21 @@
     {
       "library": "eonasdan-bootstrap-datetimepicker@4.17.47",
       "destination": "wwwroot/lib/datetimepicker/"
+    },
+    {
+      "library": "moment.js@2.24.0",
+      "destination": "wwwroot/lib/moment/",
+      "files": [
+        "moment-with-locales.min.js"
+      ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "jquery-ajax-unobtrusive@3.2.6",
+      "destination": "wwwroot/js/",
+      "files": [
+        "dist/jquery.unobtrusive-ajax.min.js"
+      ]
     }
-  ,
-{
-  "library": "moment.js@2.24.0",
-  "destination": "wwwroot/lib/moment/",
-  "files": [
-    "moment-with-locales.min.js"
   ]
-}
-]
 }

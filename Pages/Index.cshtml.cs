@@ -29,8 +29,6 @@ namespace MTM.Pages
         [BindProperty]
         public RegistrationInfo RegistrationInfo { get; set; }
 
-        public DoWDataPointClient Chart { get; set; }
-
         public string DataPoints { get; set; }
 
         public bool IsSuccess { get; set; }
@@ -60,7 +58,7 @@ namespace MTM.Pages
 
             var disciple = _context
                 .Disciples
-                .Where(d => d.IdentitcationNumber == RegistrationInfo.IdentitcationNumber && 
+                .Where(d => d.Phone == RegistrationInfo.Phone && 
                                         d.InitiateDate != null &&
                                         d.InitiateDate.Value.Year == initiateDate.Year &&
                                         d.InitiateDate.Value.Month == initiateDate.Month)
@@ -81,7 +79,7 @@ namespace MTM.Pages
                 IsSuccess = true;
             } else
             {
-                ModelState.AddModelError(string.Empty, "Không tìm thấy CMND với năm và tháng thọ pháp");
+                ModelState.AddModelError(string.Empty, "Không tìm thấy số điện thoại với năm và tháng thọ pháp");
             }
 
             return Page();

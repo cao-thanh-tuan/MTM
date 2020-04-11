@@ -9,9 +9,9 @@ namespace MTM.Models
 {
     public class RegistrationInfo
     {
-        [Required(ErrorMessage = "Vui lòng nhập CMND")]
-        [RegularExpression(@"^[0-9]{9,12}", ErrorMessage = "CMND không hợp lệ")]
-        public string IdentitcationNumber { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập số điện thoại")]
+        [RegularExpression(@"^[0-9]{9,12}", ErrorMessage = "Số điện thoại không hợp lệ")]
+        public string Phone { get; set; }
 
         public string InitiateDate { get; set; }
 

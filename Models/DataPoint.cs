@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace MTM.Models
 {
     [DataContract]
-    public class DataPoint
+	public class DataPoint
     {
 		public DataPoint(string label, int y)
 		{

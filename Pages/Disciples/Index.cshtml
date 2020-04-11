@@ -23,7 +23,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>CMND</th>
+            <th>Số Điện Thoại</th>
             <th>
                 <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort" asp-route-currentFilter="@Model.CurrentFilter">
                     Họ Tên
@@ -43,7 +43,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdentitcationNumber)
+                    @Html.DisplayFor(modelItem => item.Phone)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FullName)

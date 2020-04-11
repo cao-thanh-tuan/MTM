@@ -17,9 +17,9 @@ namespace MTM.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         [StringLength(15)]
-        [RegularExpression(@"^[0-9]")]
-        [Display(Name = "CMND")]
-        public string IdentitcationNumber { get; set; }
+        [RegularExpression(@"^[0-9]*$", ErrorMessage = "Số điện thoại không hợp lệ")]
+        [Display(Name = "Số Điện Thoại")]
+        public string Phone { get; set; }
         [StringLength(20)]
         [Display(Name = "Tên")]
         public string FirstName { get; set; }

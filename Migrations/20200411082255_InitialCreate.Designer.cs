@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MTM.Migrations
 {
     [DbContext(typeof(MTMContext))]
-    [Migration("20200402131426_InitialCreate")]
+    [Migration("20200411082255_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,24 @@ namespace MTM.Migrations
                 .HasAnnotation("ProductVersion", "3.1.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("MTM.Models.DataPoint", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Label")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Y")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("DataPoints");
+                });
 
             modelBuilder.Entity("MTM.Models.Disciple", b =>
                 {
@@ -32,7 +50,7 @@ namespace MTM.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<DateTime>("DateOfBirth")
+                    b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
@@ -43,11 +61,7 @@ namespace MTM.Migrations
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
 
-                    b.Property<string>("IdentitcationNumber")
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
-
-                    b.Property<DateTime>("InitiateDate")
+                    b.Property<DateTime?>("InitiateDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
@@ -58,19 +72,23 @@ namespace MTM.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasMaxLength(30);
 
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(15)")
+                        .HasMaxLength(15);
+
                     b.HasKey("ID");
 
-                    b.ToTable("Disciple");
+                    b.ToTable("Disciples");
                 });
 
-            modelBuilder.Entity("MTM.Models.MeditationTime", b =>
+            modelBuilder.Entity("MTM.Models.Registration", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DiscipleID")
+                    b.Property<int?>("DiscipleID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("FromTime")
@@ -83,16 +101,30 @@ namespace MTM.Migrations
 
                     b.HasIndex("DiscipleID");
 
-                    b.ToTable("MeditationTime");
+                    b.ToTable("Registrations");
                 });
 
-            modelBuilder.Entity("MTM.Models.MeditationTime", b =>
+            modelBuilder.Entity("MTM.Models.User", b =>
                 {
-                    b.HasOne("MTM.Models.Disciple", null)
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(15)")
+                        .HasMaxLength(15);
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.HasKey("Username");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("MTM.Models.Registration", b =>
+                {
+                    b.HasOne("MTM.Models.Disciple", "Disciple")
                         .WithMany("MeditaionRegisters")
-                        .HasForeignKey("DiscipleID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DiscipleID");
                 });
 #pragma warning restore 612, 618
         }

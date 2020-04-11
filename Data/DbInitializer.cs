@@ -26,11 +26,11 @@ namespace MTM.Data
             {
                 var deciples = new Disciple[]
                 {
-                new Disciple{IdentitcationNumber="023789312",FirstName="Tèo",MiddleName="Văn",LastName="Nguyễn",
-                    Address="1A Thống Nhất, Gò Vấp",Gender=Gender.MALE,DateOfBirth=DateTime.Parse("1988-01-01"),InitiateDate=DateTime.Parse("2008-10-05")},
-                new Disciple{IdentitcationNumber="023869614",FirstName="Anh",MiddleName="Thị",LastName="Trần",
+                new Disciple{Phone="0981234567",FirstName="Tèo",MiddleName="Văn",LastName="Nguyễn",
+                    Address="1A Thống Nhất, Gò Vấp",Gender=Gender.MALE,DateOfBirth=DateTime.Parse("1981-01-01"),InitiateDate=DateTime.Parse("2001-01-01")},
+                new Disciple{Phone="0901234567",FirstName="Anh",MiddleName="Thị",LastName="Trần",
                     Address="66/5 Nguyễn Văn Lượng, Go Vap",Gender=Gender.FEMALE,DateOfBirth=DateTime.Parse("1983-04-10"),InitiateDate=DateTime.Parse("2011-11-12")},
-                new Disciple{IdentitcationNumber="363827944",FirstName="Hạnh",MiddleName="Hồng",LastName="Truong",
+                new Disciple{Phone="0921234567",FirstName="Hạnh",MiddleName="Hồng",LastName="Truong",
                     Address="66/5 Nguyễn Văn Lượnng, Go Vap",Gender=Gender.UNKNOWN,DateOfBirth=DateTime.Parse("1985-06-09"),InitiateDate=DateTime.Parse("2009-08-04")}
                 };
                 foreach (Disciple d in deciples)
