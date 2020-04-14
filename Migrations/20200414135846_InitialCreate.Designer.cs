@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MTM.Migrations
 {
     [DbContext(typeof(MTMContext))]
-    [Migration("20200413162318_InitialCreate")]
+    [Migration("20200414135846_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,13 +71,14 @@ namespace MTM.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<int?>("ClassID")
+                    b.Property<int>("ClassID")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
@@ -86,9 +87,11 @@ namespace MTM.Migrations
                         .HasMaxLength(10);
 
                     b.Property<DateTime?>("InitiateDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
@@ -97,6 +100,7 @@ namespace MTM.Migrations
                         .HasMaxLength(30);
 
                     b.Property<string>("Phone")
+                        .IsRequired()
                         .HasColumnType("nvarchar(15)")
                         .HasMaxLength(15);
 
@@ -149,8 +153,10 @@ namespace MTM.Migrations
             modelBuilder.Entity("MTM.Models.Disciple", b =>
                 {
                     b.HasOne("MTM.Models.Class", "Class")
-                        .WithMany()
-                        .HasForeignKey("ClassID");
+                        .WithMany("Disciples")
+                        .HasForeignKey("ClassID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MTM.Models.Registration", b =>
