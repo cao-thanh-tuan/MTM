@@ -10,17 +10,50 @@
 <div>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Class.Name)
         </dt>
-        <dd>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Class.Name)
         </dd>
-        <dt>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Class.City)
         </dt>
-        <dd>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Class.City)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Class.Disciples)
+        </dt>
+        <dd class="col-sm-10">
+        </dd>
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>STT</th>
+                    <th>Họ Tên</th>
+                    <th>Sồ Điện Thoại</th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model.Class.Disciples.Select((value, i) => new { i, value }))
+                {
+                    <tr>
+                        <td>
+                            @(item.i + 1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.value.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.value.Phone)
+                        </td>
+                        <td>
+                            <a asp-page="../Disciples/Edit" asp-route-id="@item.value.ID">Cập Nhật</a> |
+                            <a asp-page="../Disciples/Delete" asp-route-id="@item.value.ID">Xóa</a>
+                        </td>
+                    </tr>
+                }
+            </table>
         </dd>
     </dl>
 </div>

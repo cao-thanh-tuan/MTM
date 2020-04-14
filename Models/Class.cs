@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,5 +19,8 @@ namespace MTM.Models
         [StringLength(15)]
         [Display(Name = "Thành Phố")]
         public string City { get; set; }
+
+        [Display(Name = "Đồng Tu")]
+        public ICollection<Disciple> Disciples { get; set; }
     }
 }

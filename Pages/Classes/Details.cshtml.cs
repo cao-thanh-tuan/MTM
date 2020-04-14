@@ -28,7 +28,12 @@ namespace MTM.Pages.Classes
                 return NotFound();
             }
 
-            Class = await _context.Classes.FirstOrDefaultAsync(m => m.ID == id);
+            Class = await _context.Classes
+                .Include(c => c.Disciples)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ID == id);
+
+            Class.Disciples = Class.Disciples.OrderBy(d => d.FirstName).ToList();
 
             if (Class == null)
             {
