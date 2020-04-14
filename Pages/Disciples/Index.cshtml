@@ -13,7 +13,7 @@
 <form asp-page="./Index" method="get">
     <div class="form-actions no-color">
         <p>
-            Tìm theo tên:
+            Tìm kiếm:
             <input type="text" name="SearchString" value="@Model.CurrentFilter" />
             <input type="submit" value="Search" class="btn btn-primary" /> |
             <a asp-page="./Index">Đầy đủ danh sách</a>
@@ -30,10 +30,11 @@
                 </a>
             </th>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort" asp-route-currentFilter="@Model.CurrentFilter">
-                    Thọ Pháp
+                <a asp-page="./Index" asp-route-sortOrder="@Model.ClassSort" asp-route-currentFilter="@Model.CurrentFilter">
+                    Lớp
                 </a>
             </th>
+            <th>Thọ Pháp</th>
             <th></th>
             <th></th>
         </tr>
@@ -47,6 +48,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Class.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.InitiateDate)

@@ -39,7 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Classes\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

@@ -6,11 +6,11 @@ namespace MTM.Models
 {
     public class Class
     {
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
-        [Key]
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập Tên Lớp")]
         [StringLength(15)]
         [Display(Name = "Tên Lớp")]
         public string Name { get; set; }

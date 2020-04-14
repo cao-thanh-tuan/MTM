@@ -15,6 +15,7 @@ namespace MTM.Data
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Class> Classes { get; set; }
         public DbSet<Disciple> Disciples { get; set; }
         public DbSet<Registration> Registrations { get; set; }
         public DbSet<DataPoint> DataPoints { get; set; }
@@ -22,8 +23,10 @@ namespace MTM.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("User");
+            modelBuilder.Entity<Class>().ToTable("Class");
             modelBuilder.Entity<Disciple>().ToTable("Disciple");
             modelBuilder.Entity<Registration>().ToTable("Registration");
         }
+
     }
 }

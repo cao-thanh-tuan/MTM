@@ -16,16 +16,19 @@ namespace MTM.Models
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập Số điện thoại")]
         [StringLength(15)]
         [RegularExpression(@"^[0-9]*$", ErrorMessage = "Số điện thoại không hợp lệ")]
         [Display(Name = "Số Điện Thoại")]
         public string Phone { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập Tên")]
         [StringLength(20)]
         [Display(Name = "Tên")]
         public string FirstName { get; set; }
         [StringLength(30)]
         [Display(Name = "Tên Lót")]
         public string MiddleName { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập Họ")]
         [StringLength(20)]
         [Display(Name = "Họ")]
         public string LastName { get; set; }
@@ -47,9 +50,13 @@ namespace MTM.Models
         [DataType(DataType.Date)]
         [Display(Name = "Ngày Sinh")]
         public Nullable<DateTime> DateOfBirth { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập Ngày Thọ")]
         [DataType(DataType.Date)]
         [Display(Name = "Ngày Thọ")]
         public Nullable<DateTime> InitiateDate { get; set; }
+        public int ClassID { get; set; }
+        [Display(Name = "Lớp")]
+        public Class Class { get; set; }
         [Display(Name = "Đăng Ký Thiền")]
         public ICollection<Registration> MeditaionRegisters { get; set; }
     }

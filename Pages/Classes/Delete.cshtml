@@ -1,0 +1,33 @@
+﻿@page
+@model MTM.Pages.Classes.DeleteModel
+
+@{
+    ViewData["Title"] = "Class";
+}
+
+<h2>Xóa Thông Tin Lớp</h2>
+
+<h3>Bạn muốn xóa thông tin Lớp này?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Class.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Class.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Class.City)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Class.City)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Class.ID" />
+        <input type="submit" value="Xóa" class="btn btn-danger" /> |
+        <a asp-page="./Index">Quay Về</a>
+    </form>
+</div>

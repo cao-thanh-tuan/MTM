@@ -19,6 +19,27 @@ namespace MTM.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("MTM.Models.Class", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(15)")
+                        .HasMaxLength(15);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(15)")
+                        .HasMaxLength(15);
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Class");
+                });
+
             modelBuilder.Entity("MTM.Models.DataPoint", b =>
                 {
                     b.Property<int>("ID")
@@ -48,6 +69,9 @@ namespace MTM.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<int?>("ClassID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 
@@ -76,7 +100,9 @@ namespace MTM.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Disciples");
+                    b.HasIndex("ClassID");
+
+                    b.ToTable("Disciple");
                 });
 
             modelBuilder.Entity("MTM.Models.Registration", b =>
@@ -99,7 +125,7 @@ namespace MTM.Migrations
 
                     b.HasIndex("DiscipleID");
 
-                    b.ToTable("Registrations");
+                    b.ToTable("Registration");
                 });
 
             modelBuilder.Entity("MTM.Models.User", b =>
@@ -115,7 +141,14 @@ namespace MTM.Migrations
 
                     b.HasKey("Username");
 
-                    b.ToTable("Users");
+                    b.ToTable("User");
+                });
+
+            modelBuilder.Entity("MTM.Models.Disciple", b =>
+                {
+                    b.HasOne("MTM.Models.Class", "Class")
+                        .WithMany()
+                        .HasForeignKey("ClassID");
                 });
 
             modelBuilder.Entity("MTM.Models.Registration", b =>

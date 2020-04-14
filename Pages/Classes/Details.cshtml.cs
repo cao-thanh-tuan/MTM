@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MTM.Data;
 using MTM.Models;
 
-namespace MTM.Pages.Disciples
+namespace MTM.Pages.Classes
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace MTM.Pages.Disciples
             _context = context;
         }
 
-        public Disciple Disciple { get; set; }
+        public Class Class { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,15 +28,9 @@ namespace MTM.Pages.Disciples
                 return NotFound();
             }
 
-            Disciple = await _context.Disciples
-                .Include(c => c.Class)
-                .Include(m => m.MeditaionRegisters)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(d => d.ID == id);
+            Class = await _context.Classes.FirstOrDefaultAsync(m => m.ID == id);
 
-            Disciple.MeditaionRegisters = Disciple.MeditaionRegisters.OrderByDescending(m => m.FromTime).ToList();
-
-            if (Disciple == null)
+            if (Class == null)
             {
                 return NotFound();
             }

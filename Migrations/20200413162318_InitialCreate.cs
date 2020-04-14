@@ -8,6 +8,20 @@ namespace MTM.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Class",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(maxLength: 15, nullable: false),
+                    City = table.Column<string>(maxLength: 15, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Class", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DataPoints",
                 columns: table => new
                 {
@@ -22,7 +36,19 @@ namespace MTM.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Disciples",
+                name: "User",
+                columns: table => new
+                {
+                    Username = table.Column<string>(maxLength: 15, nullable: false),
+                    Password = table.Column<string>(maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.Username);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Disciple",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
@@ -34,27 +60,22 @@ namespace MTM.Migrations
                     Address = table.Column<string>(maxLength: 50, nullable: true),
                     Gender = table.Column<string>(maxLength: 10, nullable: true),
                     DateOfBirth = table.Column<DateTime>(nullable: true),
-                    InitiateDate = table.Column<DateTime>(nullable: true)
+                    InitiateDate = table.Column<DateTime>(nullable: true),
+                    ClassID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Disciples", x => x.ID);
+                    table.PrimaryKey("PK_Disciple", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Disciple_Class_ClassID",
+                        column: x => x.ClassID,
+                        principalTable: "Class",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Username = table.Column<string>(maxLength: 15, nullable: false),
-                    Password = table.Column<string>(maxLength: 100, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Username);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Registrations",
+                name: "Registration",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
@@ -65,18 +86,23 @@ namespace MTM.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Registrations", x => x.ID);
+                    table.PrimaryKey("PK_Registration", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Registrations_Disciples_DiscipleID",
+                        name: "FK_Registration_Disciple_DiscipleID",
                         column: x => x.DiscipleID,
-                        principalTable: "Disciples",
+                        principalTable: "Disciple",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Registrations_DiscipleID",
-                table: "Registrations",
+                name: "IX_Disciple_ClassID",
+                table: "Disciple",
+                column: "ClassID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Registration_DiscipleID",
+                table: "Registration",
                 column: "DiscipleID");
         }
 
@@ -86,13 +112,16 @@ namespace MTM.Migrations
                 name: "DataPoints");
 
             migrationBuilder.DropTable(
-                name: "Registrations");
+                name: "Registration");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "User");
 
             migrationBuilder.DropTable(
-                name: "Disciples");
+                name: "Disciple");
+
+            migrationBuilder.DropTable(
+                name: "Class");
         }
     }
 }

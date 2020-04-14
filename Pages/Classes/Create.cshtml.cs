@@ -8,24 +8,27 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MTM.Data;
 using MTM.Models;
 
-namespace MTM.Pages.Disciples
+namespace MTM.Pages.Classes
 {
-    public class CreateModel : DiscipleBasePageModel
+    public class CreateModel : PageModel
     {
-        public CreateModel(MTMContext context): base(context)
+        private readonly MTM.Data.MTMContext _context;
+
+        public CreateModel(MTM.Data.MTMContext context)
         {
+            _context = context;
         }
 
         public IActionResult OnGet()
         {
-            PopulateGendersDropDownList();
-            PopulateClassesDropDownList(_context);
             return Page();
         }
 
         [BindProperty]
-        public Disciple Disciple { get; set; }
+        public Class Class { get; set; }
 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -33,16 +36,15 @@ namespace MTM.Pages.Disciples
                 return Page();
             }
 
-            if (PhoneExists(Disciple.ID, Disciple.Phone))
-            {
-                ModelState.AddModelError("Disciple.Phone", "Số điện thoại đã tồn tại");
-                PopulateClassesDropDownList(_context, Disciple.ClassID);
-                PopulateGendersDropDownList(Disciple.Gender);
+            var duplicate = _context.Classes.FirstOrDefault(c => c.Name == Class.Name);
 
+            if (duplicate != null)
+            {
+                ModelState.AddModelError("Class.Name", "Tên lớp đã tồn tại");
                 return Page();
             }
 
-            _context.Disciples.Add(Disciple);
+            _context.Classes.Add(Class);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

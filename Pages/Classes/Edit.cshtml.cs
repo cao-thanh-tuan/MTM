@@ -9,16 +9,19 @@ using Microsoft.EntityFrameworkCore;
 using MTM.Data;
 using MTM.Models;
 
-namespace MTM.Pages.Disciples
+namespace MTM.Pages.Classes
 {
-    public class EditModel : DiscipleBasePageModel
+    public class EditModel : PageModel
     {
-        public EditModel(MTMContext context) : base(context)
+        private readonly MTM.Data.MTMContext _context;
+
+        public EditModel(MTM.Data.MTMContext context)
         {
+            _context = context;
         }
 
         [BindProperty]
-        public Disciple Disciple { get; set; }
+        public Class Class { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -27,14 +30,12 @@ namespace MTM.Pages.Disciples
                 return NotFound();
             }
 
-            Disciple = GetDisciple((int)id);
-            if (Disciple == null)
+            Class = await _context.Classes.FirstOrDefaultAsync(m => m.ID == id);
+
+            if (Class == null)
             {
                 return NotFound();
             }
-
-            PopulateGendersDropDownList(Disciple.Gender);
-            PopulateClassesDropDownList(_context, Disciple.ClassID);
             return Page();
         }
 
@@ -45,14 +46,12 @@ namespace MTM.Pages.Disciples
                 return Page();
             }
 
-            _context.Attach(Disciple).State = EntityState.Modified;
+            _context.Attach(Class).State = EntityState.Modified;
 
-            if (PhoneExists(Disciple.ID, Disciple.Phone))
+            var duplicate = _context.Classes.FirstOrDefault(c => c.Name == Class.Name && c.ID != Class.ID);
+            if (duplicate != null)
             {
-                ModelState.AddModelError("Disciple.Phone", "Số điện thoại đã tồn tại");
-                PopulateClassesDropDownList(_context, Disciple.ClassID);
-                PopulateGendersDropDownList(Disciple.Gender);
-
+                ModelState.AddModelError("Class.Name", "Tên lớp đã tồn tại");
                 return Page();
             }
 
@@ -62,7 +61,7 @@ namespace MTM.Pages.Disciples
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (GetDisciple(Disciple.ID) != null)
+                if (!ClassExists(Class.ID))
                 {
                     return NotFound();
                 }
@@ -73,6 +72,11 @@ namespace MTM.Pages.Disciples
             }
 
             return RedirectToPage("./Index");
+        }
+
+        private bool ClassExists(int id)
+        {
+            return _context.Classes.Any(e => e.ID == id);
         }
     }
 }
