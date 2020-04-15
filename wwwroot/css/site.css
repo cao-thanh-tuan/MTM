@@ -78,3 +78,15 @@ body {
     margin: 2px auto;
     z-index: 1100 !important;
 }
+
+.navbar-nav {
+    padding-left:inherit !important;
+}
+
+.nav-item {
+    
+}
+
+.navbar-expand-sm .navbar-nav .nav-link {
+    padding-bottom: .5rem;
+}

@@ -19,7 +19,7 @@ namespace MTM.Models
         [Required(ErrorMessage = "Vui lòng nhập Số điện thoại")]
         [StringLength(15)]
         [RegularExpression(@"^[0-9]*$", ErrorMessage = "Số điện thoại không hợp lệ")]
-        [Display(Name = "Số Điện Thoại")]
+        [Display(Name = "Điện Thoại")]
         public string Phone { get; set; }
         [Required(ErrorMessage = "Vui lòng nhập Tên")]
         [StringLength(20)]
