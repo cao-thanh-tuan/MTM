@@ -21,17 +21,9 @@
         endTime.setHours(endTime.getHours() + 3);
     }
 
-    $('#initiateYear').datetimepicker({
+    $('#initiateDate').datetimepicker({
         locale: 'vi',
-        format: 'YYYY',
-        date: initialDate,
-        ignoreReadonly: true,
-        allowInputToggle: true
-    });
-
-    $('#initiateMonth').datetimepicker({
-        locale: 'vi',
-        format: 'MMMM',
+        format: 'L',
         date: initialDate,
         ignoreReadonly: true,
         allowInputToggle: true
@@ -47,6 +39,7 @@
     });
 
     $('#startTime').datetimepicker({
+        viewMode: 'times',
         locale: 'vi',
         format: 'LT',
         stepping: 30,
@@ -56,6 +49,7 @@
     });
 
     $('#endTime').datetimepicker({
+        viewMode: 'times',
         locale: 'vi',
         format: 'LT',
         stepping: 30,
@@ -66,28 +60,34 @@
 });
 
 
-$('#btnSubmit').click(function () {
-    initialDate = new Date(
-        $("#initiateYear").data("DateTimePicker").date()._d.getFullYear(),
-        $("#initiateMonth").data("DateTimePicker").date()._d.getMonth()
-    );
-    $("#RegistrationInfo_InitiateDate").val(initialDate.toUTCString());
 
-    startTime = new Date(
-        $("#meditaionDate").data("DateTimePicker").date()._d.getFullYear(),
-        $("#meditaionDate").data("DateTimePicker").date()._d.getMonth(),
-        $("#meditaionDate").data("DateTimePicker").date()._d.getDate(),
-        $("#startTime").data("DateTimePicker").date()._d.getHours(),
-        $("#startTime").data("DateTimePicker").date()._d.getMinutes()
-    );
-    $("#RegistrationInfo_StartTime").val(startTime.toUTCString());
+$(function () {
+    $("#btnSubmit").click(function () {
+        initialDate = new Date(
+            $("#initiateDate").datetimepicker("viewDate")._d.getFullYear(),
+            $("#initiateDate").datetimepicker("viewDate")._d.getMonth(),
+            $("#initiateDate").datetimepicker("viewDate")._d.getDate()
+        );
+        $("#RegistrationInfo_InitiateDate").val(initialDate.toUTCString());
 
-    endTime = new Date(
-        $("#meditaionDate").data("DateTimePicker").date()._d.getFullYear(),
-        $("#meditaionDate").data("DateTimePicker").date()._d.getMonth(),
-        $("#meditaionDate").data("DateTimePicker").date()._d.getDate(),
-        $("#endTime").data("DateTimePicker").date()._d.getHours(),
-        $("#endTime").data("DateTimePicker").date()._d.getMinutes()
-    );
-    $("#RegistrationInfo_EndTime").val(endTime.toUTCString());
-});
+        startTime = new Date(
+            $("#meditaionDate").datetimepicker("viewDate")._d.getFullYear(),
+            $("#meditaionDate").datetimepicker("viewDate")._d.getMonth(),
+            $("#meditaionDate").datetimepicker("viewDate")._d.getDate(),
+            $("#startTime").datetimepicker("viewDate")._d.getHours(),
+            $("#startTime").datetimepicker("viewDate")._d.getMinutes()
+        );
+        $("#RegistrationInfo_StartTime").val(startTime.toUTCString());
+
+        endTime = new Date(
+            $("#meditaionDate").datetimepicker("viewDate")._d.getFullYear(),
+            $("#meditaionDate").datetimepicker("viewDate")._d.getMonth(),
+            $("#meditaionDate").datetimepicker("viewDate")._d.getDate(),
+            $("#endTime").datetimepicker("viewDate")._d.getHours(),
+            $("#endTime").datetimepicker("viewDate")._d.getMinutes()
+        );
+        $("#RegistrationInfo_EndTime").val(endTime.toUTCString());
+
+        this.form.submit()
+    })
+}); 

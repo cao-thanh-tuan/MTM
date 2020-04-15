@@ -61,7 +61,8 @@ namespace MTM.Pages
                 .Where(d => d.Phone == RegistrationInfo.Phone && 
                                         d.InitiateDate != null &&
                                         d.InitiateDate.Value.Year == initiateDate.Year &&
-                                        d.InitiateDate.Value.Month == initiateDate.Month)
+                                        d.InitiateDate.Value.Month == initiateDate.Month &&
+                                        d.InitiateDate.Value.Day == initiateDate.Day)
                 .FirstOrDefault();
 
             if (disciple != null)
@@ -79,7 +80,7 @@ namespace MTM.Pages
                 IsSuccess = true;
             } else
             {
-                ModelState.AddModelError(string.Empty, "Không tìm thấy số điện thoại với năm và tháng thọ pháp");
+                ModelState.AddModelError(string.Empty, "Không tìm thấy số điện thoại với ngày thọ pháp");
             }
 
             return Page();

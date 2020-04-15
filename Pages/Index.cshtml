@@ -4,30 +4,6 @@
     ViewData["Title"] = "Home";
 }
 
-@section Scripts {
-    <environment names="Development">
-        <link rel="stylesheet" href="~/css/bootstrap.min.css">
-        <link rel="stylesheet" href="~/css/bootstrap-datetimepicker.min.css">
-        <script src="~/js/jquery-2.1.1.min.js"></script>
-        <script src="~/js/bootstrap.min.js"></script>
-        <script src="~/js/moment-with-locales.js"></script>
-        <script src="~/js/bootstrap-datetimepicker.min.js"></script>
-        <script src="~/js/canvasjs.min.js"></script>
-        <script src="~/js/register.js"></script>
-    </environment>
-    <environment names="Production">
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
-
-        <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
-        <script src="//canvasjs.com/assets/script/canvasjs.min.js"></script>
-        <script src="~/js/register.js"></script>
-    </environment>
-}
-
 <script type="text/javascript">
     //<![CDATA[
     $(document).ready(function () {
@@ -72,48 +48,39 @@
                 <span asp-validation-for="RegistrationInfo.Phone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Năm Thọ Pháp</label>
-                <div class='input-group date' id='initiateYear'>
-                    <input type='text' readonly class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Tháng Thọ Pháp</label>
-                <div class='input-group date' id='initiateMonth'>
-                    <input type='text' readonly class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
+                <label class="control-label">Ngày Thọ Pháp</label>
+                <div class="input-group date" id="initiateDate" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#initiateDate" readonly/>
+                    <div class="input-group-append" data-target="#initiateDate" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label">Đăng Ký Ngày Thiền</label>
-                <div class='input-group date' id='meditaionDate'>
-                    <input type='text' readonly class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
+                <div class="input-group date" id="meditaionDate" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#meditaionDate" readonly />
+                    <div class="input-group-append" data-target="#meditaionDate" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label">Đăng Ký Giờ Bắt Đầu Thiền</label>
-                <div class='input-group date' id='startTime'>
-                    <input type='text' readonly class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
+                <label class="control-label">Giờ Bắt Đầu Thiền</label>
+                <div class="input-group date" id="startTime" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#startTime" readonly />
+                    <div class="input-group-append" data-target="#startTime" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label">Đăng Ký Giờ Kết Thúc Thiền</label>
-                <div class='input-group date' id='endTime'>
-                    <input type='text' readonly class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
+                <label class="control-label">Giờ Kết Thúc Thiền</label>
+                <div class="input-group date" id="endTime" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#endTime" readonly />
+                    <div class="input-group-append" data-target="#endTime" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
                 </div>
             </div>
             <div class="form-group">

@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Content Remove="Pages\Index.old.cshtml" />
-    <Content Remove="wwwroot\datetime.html" />
     <Content Remove="wwwroot\inline.html" />
     <Content Remove="wwwroot\popup.html" />
   </ItemGroup>
@@ -40,6 +39,7 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="wwwroot\fonts\" />
   </ItemGroup>
 
 </Project>
