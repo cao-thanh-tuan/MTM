@@ -11,13 +11,10 @@ using MTM.Models;
 
 namespace MTM.Pages.Classes
 {
-    public class EditModel : PageModel
+    public class EditModel : ClassBasePageModel
     {
-        private readonly MTM.Data.MTMContext _context;
-
-        public EditModel(MTM.Data.MTMContext context)
+        public EditModel(MTMContext context) : base(context)
         {
-            _context = context;
         }
 
         [BindProperty]
@@ -30,12 +27,13 @@ namespace MTM.Pages.Classes
                 return NotFound();
             }
 
-            Class = await _context.Classes.FirstOrDefaultAsync(m => m.ID == id);
-
+            Class = GetClass((int)id);
             if (Class == null)
             {
                 return NotFound();
             }
+
+            PopulateCitiesDropDownList(Class.City);
             return Page();
         }
 
@@ -48,10 +46,11 @@ namespace MTM.Pages.Classes
 
             _context.Attach(Class).State = EntityState.Modified;
 
-            var duplicate = _context.Classes.FirstOrDefault(c => c.Name == Class.Name && c.ID != Class.ID);
-            if (duplicate != null)
+            if (ClassExists(Class.ID, Class.Name))
             {
                 ModelState.AddModelError("Class.Name", "Tên lớp đã tồn tại");
+                PopulateCitiesDropDownList(Class.City);
+
                 return Page();
             }
 
@@ -61,7 +60,7 @@ namespace MTM.Pages.Classes
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ClassExists(Class.ID))
+                if (GetClass(Class.ID) != null)
                 {
                     return NotFound();
                 }
@@ -72,11 +71,6 @@ namespace MTM.Pages.Classes
             }
 
             return RedirectToPage("./Index");
-        }
-
-        private bool ClassExists(int id)
-        {
-            return _context.Classes.Any(e => e.ID == id);
         }
     }
 }

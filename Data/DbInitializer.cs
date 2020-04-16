@@ -23,7 +23,7 @@ namespace MTM.Data
             }
 
             if (!context.Classes.Any()) {
-                context.Classes.Add(new Class{Name="Lớp 1", City="HCM"});
+                context.Classes.Add(new Class{Name="Lớp 1", City="TP HCM"});
                 context.Classes.Add(new Class { Name = "Lớp 2" });
                 context.Classes.Add(new Class { Name = "Lớp 3", City = "Hà Nội" });
                 context.SaveChanges();

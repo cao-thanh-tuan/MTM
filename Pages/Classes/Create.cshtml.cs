@@ -10,17 +10,15 @@ using MTM.Models;
 
 namespace MTM.Pages.Classes
 {
-    public class CreateModel : PageModel
+    public class CreateModel : ClassBasePageModel
     {
-        private readonly MTM.Data.MTMContext _context;
-
-        public CreateModel(MTM.Data.MTMContext context)
+        public CreateModel(MTMContext context) : base(context)
         {
-            _context = context;
         }
 
         public IActionResult OnGet()
         {
+            PopulateCitiesDropDownList();
             return Page();
         }
 
@@ -36,11 +34,10 @@ namespace MTM.Pages.Classes
                 return Page();
             }
 
-            var duplicate = _context.Classes.FirstOrDefault(c => c.Name == Class.Name);
-
-            if (duplicate != null)
+            if (ClassExists(Class.ID, Class.Name))
             {
                 ModelState.AddModelError("Class.Name", "Tên lớp đã tồn tại");
+                PopulateCitiesDropDownList(Class.City);
                 return Page();
             }
 

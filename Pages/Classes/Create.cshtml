@@ -19,7 +19,10 @@
             </div>
             <div class="form-group">
                 <label asp-for="Class.City" class="control-label"></label>
-                <input asp-for="Class.City" class="form-control" />
+                <select asp-for="Class.City" class="form-control"
+                        asp-items="@Model.CitySL">
+                    <option value="">-- Chọn thành phố --</option>
+                </select>
                 <span asp-validation-for="Class.City" class="text-danger"></span>
             </div>
             <div class="form-group">
