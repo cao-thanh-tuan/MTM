@@ -17,9 +17,6 @@ namespace MTM.Pages.Classes
         {
         }
 
-        [BindProperty]
-        public Class Class { get; set; }
-
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -27,7 +24,7 @@ namespace MTM.Pages.Classes
                 return NotFound();
             }
 
-            Class = GetClass((int)id);
+            Class = await GetClass(id);
             if (Class == null)
             {
                 return NotFound();
@@ -60,7 +57,7 @@ namespace MTM.Pages.Classes
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (GetClass(Class.ID) != null)
+                if (await GetClass(Class.ID) != null)
                 {
                     return NotFound();
                 }

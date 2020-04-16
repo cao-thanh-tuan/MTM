@@ -10,17 +10,12 @@ using MTM.Models;
 
 namespace MTM.Pages.Disciples
 {
-    public class DetailsModel : PageModel
+    public class DetailsModel : DiscipleBasePageModel
     {
-        private readonly MTM.Data.MTMContext _context;
-
-        public DetailsModel(MTM.Data.MTMContext context)
+        public DetailsModel(MTMContext context) : base(context)
         {
-            _context = context;
         }
-
-        public Disciple Disciple { get; set; }
-
+        
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)

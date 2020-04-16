@@ -12,10 +12,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Class[0].Name)
+                @Html.DisplayNameFor(model => model.Classes[0].Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Class[0].City)
+                @Html.DisplayNameFor(model => model.Classes[0].City)
             </th>
             <th>
                 <div class="col">
@@ -25,7 +25,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Class) {
+@foreach (var item in Model.Classes) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)

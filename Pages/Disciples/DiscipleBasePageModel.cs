@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MTM.Data;
 using MTM.Models;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MTM.Pages.Disciples
 {
@@ -16,12 +18,15 @@ namespace MTM.Pages.Disciples
             _context = context;
         }
 
+        [BindProperty]
+        public Disciple Disciple { get; set; }
+
         public SelectList ClassNameSL { get; set; }
         public SelectList GenderSL { get; set; }
 
-        protected Disciple GetDisciple(int id)
+        protected Task<Disciple> GetDisciple(int? id)
         {
-            return _context.Disciples.FirstOrDefault(m => m.ID == id);
+            return _context.Disciples.FirstOrDefaultAsync(m => m.ID == id);
         }
 
         protected bool PhoneExists(int discipleId, string phone)

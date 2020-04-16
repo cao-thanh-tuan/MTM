@@ -10,17 +10,11 @@ using MTM.Models;
 
 namespace MTM.Pages.Classes
 {
-    public class DeleteModel : PageModel
+    public class DeleteModel : ClassBasePageModel
     {
-        private readonly MTM.Data.MTMContext _context;
-
-        public DeleteModel(MTM.Data.MTMContext context)
+        public DeleteModel(MTMContext context) : base(context)
         {
-            _context = context;
         }
-
-        [BindProperty]
-        public Class Class { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,12 +23,12 @@ namespace MTM.Pages.Classes
                 return NotFound();
             }
 
-            Class = await _context.Classes.FirstOrDefaultAsync(m => m.ID == id);
-
+            Class = await GetClass(id);
             if (Class == null)
             {
                 return NotFound();
             }
+
             return Page();
         }
 
@@ -45,8 +39,7 @@ namespace MTM.Pages.Classes
                 return NotFound();
             }
 
-            Class = await _context.Classes.FindAsync(id);
-
+            Class = await GetClass(id);
             if (Class != null)
             {
                 _context.Classes.Remove(Class);

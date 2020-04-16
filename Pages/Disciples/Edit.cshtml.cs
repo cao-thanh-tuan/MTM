@@ -17,9 +17,6 @@ namespace MTM.Pages.Disciples
         {
         }
 
-        [BindProperty]
-        public Disciple Disciple { get; set; }
-
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -27,7 +24,7 @@ namespace MTM.Pages.Disciples
                 return NotFound();
             }
 
-            Disciple = GetDisciple((int)id);
+            Disciple = await GetDisciple(id);
             if (Disciple == null)
             {
                 return NotFound();
@@ -62,7 +59,7 @@ namespace MTM.Pages.Disciples
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (GetDisciple(Disciple.ID) != null)
+                if (await GetDisciple(Disciple.ID) != null)
                 {
                     return NotFound();
                 }

@@ -19,11 +19,11 @@ namespace MTM.Pages.Classes
             _context = context;
         }
 
-        public IList<Class> Class { get;set; }
+        public IList<Class> Classes { get;set; }
 
         public async Task OnGetAsync()
         {
-            Class = await _context.Classes.ToListAsync();
+            Classes = await _context.Classes.ToListAsync();
         }
     }
 }

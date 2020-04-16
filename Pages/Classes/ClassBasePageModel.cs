@@ -1,14 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using MTM.Data;
 using MTM.Models;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MTM.Pages.Classes
 {
     public class ClassBasePageModel : PageModel
     {
         protected readonly MTMContext _context;
+
+        [BindProperty]
+        public Class Class { get; set; }
 
         public ClassBasePageModel(MTMContext context)
         {
@@ -17,9 +23,9 @@ namespace MTM.Pages.Classes
 
         public SelectList CitySL { get; set; }
 
-        protected Class GetClass(int id)
+        protected Task<Class> GetClass(int? id)
         {
-            return _context.Classes.FirstOrDefault(m => m.ID == id);
+            return _context.Classes.FirstOrDefaultAsync(m => m.ID == id);
         }
 
         protected bool ClassExists(int classId, string name)

@@ -10,17 +10,11 @@ using MTM.Models;
 
 namespace MTM.Pages.Disciples
 {
-    public class DeleteModel : PageModel
+    public class DeleteModel : DiscipleBasePageModel
     {
-        private readonly MTM.Data.MTMContext _context;
-
-        public DeleteModel(MTM.Data.MTMContext context)
+        public DeleteModel(MTMContext context) : base(context)
         {
-            _context = context;
         }
-
-        [BindProperty]
-        public Disciple Disciple { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,8 +23,7 @@ namespace MTM.Pages.Disciples
                 return NotFound();
             }
 
-            Disciple = await _context.Disciples.FirstOrDefaultAsync(m => m.ID == id);
-
+            Disciple = await GetDisciple(id);
             if (Disciple == null)
             {
                 return NotFound();
@@ -45,8 +38,7 @@ namespace MTM.Pages.Disciples
                 return NotFound();
             }
 
-            Disciple = await _context.Disciples.FindAsync(id);
-
+            Disciple = await GetDisciple(id);
             if (Disciple != null)
             {
                 _context.Disciples.Remove(Disciple);

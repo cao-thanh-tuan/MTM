@@ -23,9 +23,6 @@ namespace MTM.Pages.Disciples
             return Page();
         }
 
-        [BindProperty]
-        public Disciple Disciple { get; set; }
-
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

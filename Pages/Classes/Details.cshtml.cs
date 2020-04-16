@@ -10,16 +10,11 @@ using MTM.Models;
 
 namespace MTM.Pages.Classes
 {
-    public class DetailsModel : PageModel
+    public class DetailsModel : ClassBasePageModel
     {
-        private readonly MTM.Data.MTMContext _context;
-
-        public DetailsModel(MTM.Data.MTMContext context)
+        public DetailsModel(MTMContext context) : base(context)
         {
-            _context = context;
         }
-
-        public Class Class { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
