@@ -5,7 +5,7 @@
     ViewData["Title"] = "Class";
 }
 
-<h2>Xóa Thông Tin Lớp</h2>
+<h3>Xóa Thông Tin Lớp</h3>
 
 <h3>Bạn muốn xóa thông tin Lớp này?</h3>
 <div>
@@ -27,7 +27,9 @@
     
     <form method="post">
         <input type="hidden" asp-for="Class.ID" />
-        <input type="submit" value="Xóa" class="btn btn-danger" /> |
+        <div class="form-group">
+            <button type="submit" class="btn btn-danger mb-2"><i class="fa fa-trash">&nbsp;</i>&nbsp;Xóa</button>
+        </div>
         <a asp-page="./Index">Quay Về</a>
     </form>
 </div>

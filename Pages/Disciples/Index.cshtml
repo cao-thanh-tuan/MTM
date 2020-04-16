@@ -5,19 +5,20 @@
     ViewData["Title"] = "Disciples";
 }
 
-<h2>Danh Sách Đồng Tu</h2>
+<h3>Danh Sách Đồng Tu</h3>
 
-<p>
-    <a asp-page="Create">Tạo Mới</a>
-</p>
+<p>&nbsp;</p>
 <form asp-page="./Index" method="get">
     <div class="form-actions no-color">
-        <p>
-            Tìm kiếm:
-            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
-            <input type="submit" value="Search" class="btn btn-primary" /> |
-            <a asp-page="./Index">Đầy đủ danh sách</a>
-        </p>
+        <div class="form-row">
+            <div class="col">
+                <input type="text" name="SearchString" class="form-control" value="@Model.CurrentFilter" placeholder="Tên . Lớp . Số ĐT " />
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> Tìm</button> |
+                <a asp-page="./Index">Hủy Tìm Kiếm</a>
+            </div>
+        </div>
     </div>
 </form>
 <table class="table">
@@ -35,32 +36,41 @@
                 </a>
             </th>
             <th>Thọ Pháp</th>
-            <th></th>
-            <th></th>
+            <th>
+                <div class="col">
+                    <a asp-page="./Create" class="btn-outline btn-outline-secondary mb-2"><i class="fa fa-plus"></i>&nbsp;Thêm Mới</a>
+                </div>
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Disciples)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Phone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FullName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Class.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.InitiateDate)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.ID">Cập Nhật</a> |
-                    <a asp-page="./Details" asp-route-id="@item.ID">Chi Tiết</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.ID">Xóa</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Class.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InitiateDate)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID" title="Cập Nhật" class="btn btn-group btn-outline-info mb-2">
+                    <span class="fa fa-edit"></span>
+                </a>
+                <a asp-page="./Details" asp-route-id="@item.ID" title="Chi Tiết" class="btn btn-group btn-outline-primary mb-2">
+                    <span class="fa fa-eye" aria-hidden="true"></span>
+                </a>
+                <a asp-page="./Delete" asp-route-id="@item.ID" title="Xóa" class="btn btn-group btn-outline-danger mb-2">
+                    <span class="fa fa-trash" aria-hidden="true"></span>
+                </a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
