@@ -37,31 +37,34 @@
                 </tr>
                 @foreach (var item in Model.Class.Disciples.Select((value, i) => new { i, value }))
                 {
-            <tr>
-                <td>
-                    @(item.i + 1)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.value.FullName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.value.Phone)
-                </td>
-                <td>
-                    <a asp-page="../Disciples/Edit" asp-route-id="@item.value.ID" title="Cập Nhật" class="btn btn-group btn-outline-info mb-2">
-                        <span class="fa fa-edit"></span>
-                    </a>
-                    <a asp-page="../Disciples/Delete" asp-route-id="@item.value.ID" title="Xóa" class="btn btn-group btn-outline-danger mb-2">
-                        <span class="fa fa-trash" aria-hidden="true"></span>
-                    </a>
-                </td>
-            </tr>
+                    <tr>
+                        <td>
+                            @(item.i + 1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.value.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.value.Phone)
+                        </td>
+                        <td>
+                            <a asp-page="../Disciples/Edit" asp-route-id="@item.value.ID" title="Cập Nhật" class="btn btn-group btn-outline-info mb-2">
+                                <span class="fa fa-edit"></span>
+                            </a>
+                            <a asp-page="../Disciples/Delete" asp-route-id="@item.value.ID" title="Xóa" class="btn btn-group btn-outline-danger mb-2">
+                                <span class="fa fa-trash" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                    </tr>
                 }
             </table>
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Class.ID">Cập Nhật</a> |
-    <a asp-page="./Index">Quay Về</a>
+    <a asp-page="./Edit" asp-route-id="@Model.Class.ID" class="btn btn-primary mb-2"><i class="fa fa-edit">&nbsp;</i>&nbsp;Cập Nhật</a>
 </div>
+<div>
+    <a asp-page="./Index" class="fa fa-reply btn-outline-secondary">&nbsp;Quay Về</a>
+</div>
+

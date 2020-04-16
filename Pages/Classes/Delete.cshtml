@@ -10,17 +10,17 @@
 <h3>Bạn muốn xóa thông tin Lớp này?</h3>
 <div>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
+    <dl class="row">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Class.Name)
         </dt>
-        <dd>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Class.Name)
         </dd>
-        <dt>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Class.City)
         </dt>
-        <dd>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Class.City)
         </dd>
     </dl>
@@ -30,6 +30,8 @@
         <div class="form-group">
             <button type="submit" class="btn btn-danger mb-2"><i class="fa fa-trash">&nbsp;</i>&nbsp;Xóa</button>
         </div>
-        <a asp-page="./Index">Quay Về</a>
+        <div>
+            <a asp-page="./Index" class="fa fa-reply btn-outline-secondary">&nbsp;Quay Về</a>
+        </div>
     </form>
 </div>

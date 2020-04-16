@@ -91,7 +91,10 @@
         </dd>
     </dl>
 </div>
+<div class="form-group">
+    <a asp-page="./Edit" asp-route-id="@Model.Disciple.ID" class="btn btn-primary mb-2"><i class="fa fa-edit">&nbsp;</i>&nbsp;Cập Nhật</a>
+</div>
+
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Disciple.ID">Cập Nhật</a> |
-    <a asp-page="./Index">Quay Về</a>
+    <a asp-page="./Index" class="fa fa-reply btn-outline-secondary">&nbsp;Quay Về</a>
 </div>

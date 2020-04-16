@@ -8,14 +8,31 @@
 <h3>Danh Sách Lớp</h3>
 
 <p>&nbsp;</p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <div class="form-row">
+            <div class="col">
+                <input type="text" name="SearchString" class="form-control" value="@Model.CurrentFilter" placeholder="Tên . Thành Phố " />
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> Tìm</button> |
+                <a asp-page="./Index">Hủy Tìm Kiếm</a>
+            </div>
+        </div>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Classes[0].Name)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort" asp-route-currentFilter="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Classes[0].Name)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Classes[0].City)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.CitySort" asp-route-currentFilter="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Classes[0].City)
+                </a>
             </th>
             <th>
                 <div class="col">
@@ -25,26 +42,47 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Classes) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID" title="Cập Nhật" class="btn btn-group btn-outline-info mb-2">
-                    <span class="fa fa-edit"></span>
-                </a>
-                <a asp-page="./Details" asp-route-id="@item.ID" title="Chi Tiết" class="btn btn-group btn-outline-primary mb-2">
-                    <span class="fa fa-eye" aria-hidden="true"></span>
-                </a>
-                <a asp-page="./Delete" asp-route-id="@item.ID" title="Xóa" class="btn btn-group btn-outline-danger mb-2">
-                    <span class="fa fa-trash" aria-hidden="true"></span>
-                </a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Classes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID" title="Cập Nhật" class="btn btn-group btn-outline-info mb-2">
+                        <span class="fa fa-edit"></span>
+                    </a>
+                    <a asp-page="./Details" asp-route-id="@item.ID" title="Chi Tiết" class="btn btn-group btn-outline-primary mb-2">
+                        <span class="fa fa-eye" aria-hidden="true"></span>
+                    </a>
+                    <a asp-page="./Delete" asp-route-id="@item.ID" title="Xóa" class="btn btn-group btn-outline-danger mb-2">
+                        <span class="fa fa-trash" aria-hidden="true"></span>
+                    </a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.Classes.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Classes.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Classes.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+    Trang trước
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Classes.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+    Trang sau
+</a>
