@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -22,14 +23,18 @@ namespace MTM.Pages
         }
 
         [BindProperty]
-        public User Login { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập Tên Đăng Nhập")]
+        [Display(Name = "Tên Đăng Nhập")]
+        public string Username { get; set; }
 
         [BindProperty]
-        public string Message { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập Mật Khẩu")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Mật Khẩu")]
+        public string Password { get; set; }
 
         public void OnGet()
         {
-            Message = "";
         }
 
         public async Task<IActionResult> OnPost()
@@ -39,19 +44,19 @@ namespace MTM.Pages
                 return Page();
             }
 
-            User user = _context.Users.Where(u => u.Username == Login.Username).FirstOrDefault();
+            User user = _context.Users.Where(u => u.Username == Username).FirstOrDefault();
             if (user == null)
             {
-                ModelState.AddModelError(string.Empty, "Không tìm thấy tên đăng nhập này");
+                ModelState.AddModelError(string.Empty, "Tên đăng nhập không tồn tại");
                 return Page();
             }
 
             var passwordHasher = new PasswordHasher<string>();
-            if (passwordHasher.VerifyHashedPassword(null, user.Password, Login.Password) == PasswordVerificationResult.Success)
+            if (passwordHasher.VerifyHashedPassword(user.Username, user.Password, Password) == PasswordVerificationResult.Success)
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, Login.Username)
+                    new Claim(ClaimTypes.Name, user.Username)
                 };
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));

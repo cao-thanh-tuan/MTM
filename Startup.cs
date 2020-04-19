@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace MTM
 {
@@ -56,13 +57,22 @@ namespace MTM
                 options.AccessDeniedPath = $"/Login";
             });
 
+            services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
+
             services.AddDbContext<MTMContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MTMContext")));
 
             services.Configure<IISServerOptions>(options =>
             {
-                options.AutomaticAuthentication = false;
+                options.AllowSynchronousIO = true;
+                //options.AutomaticAuthentication = false;
             });
+
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

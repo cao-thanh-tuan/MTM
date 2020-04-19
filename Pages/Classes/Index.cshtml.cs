@@ -70,8 +70,7 @@ namespace MTM.Pages.Classes
                     break;
             }
 
-            int pageSize = 10;
-            Classes = await PaginatedList<Class>.CreateAsync(classIQ, pageIndex ?? 1, pageSize);
+            Classes = await PaginatedList<Class>.CreateAsync(classIQ, pageIndex ?? 1, Common.PAGE_SIZE);
         }
     }
 }

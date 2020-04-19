@@ -69,9 +69,8 @@ namespace MTM.Pages.Disciples
                     break;
             }
 
-            int pageSize = 10;
             Disciples = await PaginatedList<Disciple>.CreateAsync(
-                discipleIQ.Include(d => d.Class).AsNoTracking(), pageIndex ?? 1, pageSize);
+                discipleIQ.Include(d => d.Class).AsNoTracking(), pageIndex ?? 1, Common.PAGE_SIZE);
         }
     }
 }

@@ -15,6 +15,7 @@
         <script src="~/js/moment-with-locales.min.js"></script>
         <script src="~/js/tempusdominus-bootstrap-4.min.js"></script>
         <script src="~/js/canvasjs.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     </environment>
 
     <environment include="Production">
@@ -27,17 +28,22 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     </environment>
 
     <link rel="stylesheet" href="~/css/site.css" />
     <script src="~/js/site.js"></script>
-    <script src="~/js/register.js"></script>
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light topnav border-bottom box-shadow mb-3">
             <div class="container">
-                <h3><a class="navbar-brand" asp-area="" asp-page="/Index">Ăn thuần chay kiến tạo Hòa Bình</a></h3>
+                <h3>
+                    <i class="fa fa-heart fa-fw text-danger" style="font-size:16px"></i>
+                    <a class="toptitle" asp-area="" asp-page="/Index">Ăn thuần chay kiến tạo Hòa Bình</a>
+                    <i class="fa fa-heart fa-fw text-danger" style="font-size:16px"></i>
+                </h3>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -45,24 +51,30 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Trang Chủ</a>
+                            <a class="nav-link text-light" asp-area="" asp-page="/Index">Trang Chủ</a>
                         </li>
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Classes/Index">Lớp</a>
+                                <a class="nav-link text-light" asp-area="" asp-page="/Classes/Index">Lớp</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Disciples/Index">Đồng Tu</a>
+                                <a class="nav-link text-light" asp-area="" asp-page="/Disciples/Index">Đồng Tu</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Logout">Đăng Xuất</a>
+                                <a class="nav-link text-light" asp-area="" asp-page="/Users/Index">Người Dùng</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-page="/Users/ChangePassword">Đổi Mật Khẩu</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-page="/Logout">Đăng Xuất</a>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Login">Đăng Nhập</a>
+                                <a class="nav-link text-light" asp-area="" asp-page="/Login">Đăng Nhập</a>
                             </li>
                         }
                     </ul>

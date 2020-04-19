@@ -1,0 +1,42 @@
+﻿@page
+@model MTM.Pages.Users.CreateModel
+
+@{
+    ViewData["Title"] = "User";
+}
+
+<h4>Thêm mới Người Dùng</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="LoginUser.Username" class="control-label"></label>
+                <input asp-for="LoginUser.Username" class="form-control" autocomplete="off" />
+                <span asp-validation-for="LoginUser.Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoginUser.Password" class="control-label"></label>
+                <input asp-for="LoginUser.Password" class="form-control" autocomplete="off" />
+                <span asp-validation-for="LoginUser.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoginUser.ConfirmPassword" class="control-label"></label>
+                <input asp-for="LoginUser.ConfirmPassword" class="form-control" autocomplete="off" />
+                <span asp-validation-for="LoginUser.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-plus">&nbsp;</i>&nbsp;Thêm Mới</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index" class="fa fa-reply btn-outline-secondary">&nbsp;Quay Về</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

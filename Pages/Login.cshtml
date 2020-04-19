@@ -1,28 +1,34 @@
 ﻿@page
 @model LoginModel
+
 @{
-    ViewData["Title"] = "Admin Login";
+    ViewData["Title"] = "Login";
 }
 
-<h1 class="h5">Đăng nhập vào trang quản lý</h1>
+<h4>Đăng nhập vào trang quản lý</h4>
+<hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Login.Username" class="control-label"></label>
-                <input asp-for="Login.Username" class="form-control" />
-                <span asp-validation-for="Login.Username" class="text-danger"></span>
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Login.Password" class="control-label"></label>
-                <input asp-for="Login.Password" class="form-control" />
-                <span asp-validation-for="Login.Password" class="text-danger"></span>
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Đăng Nhập" class="btn btn-primary" />
+                <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-sign-in"></i> Đăng Nhập</button>
                 @Html.AntiForgeryToken()
             </div>
         </form>
     </div>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

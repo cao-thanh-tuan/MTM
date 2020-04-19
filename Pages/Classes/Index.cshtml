@@ -5,9 +5,9 @@
     ViewData["Title"] = "Classes";
 }
 
-<h3>Danh Sách Lớp</h3>
+<h4>Danh Sách Lớp</h4>
 
-<p>&nbsp;</p>
+<hr />
 <form asp-page="./Index" method="get">
     <div class="form-actions no-color">
         <div class="form-row">
@@ -34,10 +34,10 @@
                     @Html.DisplayNameFor(model => model.Classes[0].City)
                 </a>
             </th>
-            <th>
-                <div class="col">
-                    <a asp-page="./Create" class="btn-outline btn-outline-secondary mb-2"><i class="fa fa-plus"></i>&nbsp;Thêm Mới</a>
-                </div>
+            <th class="col-function">
+                <a asp-page="./Create" title="Thêm Mới" class="btn btn-sm btn-outline btn-outline-primary mb-2 func-icon">
+                    <span class="fa fa-plus"></span>
+                </a>
             </th>
         </tr>
     </thead>
@@ -51,14 +51,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.City)
                 </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.ID" title="Cập Nhật" class="btn btn-group btn-outline-info mb-2">
+                <td class="col-function">
+                    <a asp-page="./Edit" asp-route-id="@item.ID" title="Cập Nhật" class="btn btn-group btn-outline-info mb-2 func-icon">
                         <span class="fa fa-edit"></span>
                     </a>
-                    <a asp-page="./Details" asp-route-id="@item.ID" title="Chi Tiết" class="btn btn-group btn-outline-primary mb-2">
+                    <a asp-page="./Details" asp-route-id="@item.ID" title="Chi Tiết" class="btn btn-group btn-outline-success mb-2 func-icon">
                         <span class="fa fa-eye" aria-hidden="true"></span>
                     </a>
-                    <a asp-page="./Delete" asp-route-id="@item.ID" title="Xóa" class="btn btn-group btn-outline-danger mb-2">
+                    <a asp-page="./Delete" asp-route-id="@item.ID" title="Xóa" class="btn btn-group btn-outline-danger mb-2 func-icon">
                         <span class="fa fa-trash" aria-hidden="true"></span>
                     </a>
                 </td>

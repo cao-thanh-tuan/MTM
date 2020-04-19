@@ -1,0 +1,87 @@
+﻿@page
+@model MTM.Pages.Users.IndexModel
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery antiforgery
+@{
+    var token = antiforgery.GetAndStoreTokens(HttpContext).RequestToken;
+}
+@{
+    ViewData["Title"] = "Users";
+}
+
+<script src="~/js/user.js"></script>
+
+<h4>Danh Sách Người Dùng</h4>
+
+<hr />
+<input hidden name="__RequestVerificationToken" value="@token" />
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <div class="form-row">
+            <div class="col">
+                <input type="text" name="SearchString" class="form-control" value="@Model.CurrentFilter" placeholder="Tên Người Dùng" />
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> Tìm</button> |
+                <a asp-page="./Index">Hủy Tìm Kiếm</a>
+            </div>
+        </div>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort" asp-route-currentFilter="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Users[0].Username)
+                </a>
+            </th>
+            <th class="col-function">
+                <a asp-page="./Create" title="Thêm Mới" class="btn btn-sm btn-outline btn-outline-primary mb-2 func-icon">
+                    <span class="fa fa-plus"></span>
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Users.Select((value, i) => new { i, value }))
+        {
+            <tr>
+                <td>
+                    @(item.i + 1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.value.Username)
+                </td>
+                <td class="col-function">
+                    <button id="btnChangePassword_@item.value.Username" value="@item.value.Username" title="Đổi Mật Khẩu" class="btn btn-group btn-outline-info mb-2 func-icon">
+                        <span class="fa fa-edit"></span>
+                    </button>
+                    <button id="btnDelete_@item.value.Username" value="@item.value.Username" title="Xóa" class="btn btn-group btn-outline-danger mb-2 func-icon">
+                        <span class="fa fa-trash"></span>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.Users.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Users.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Users.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+    Trang trước
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Users.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+    Trang sau
+</a>

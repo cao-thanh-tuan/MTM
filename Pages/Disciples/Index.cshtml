@@ -5,14 +5,13 @@
     ViewData["Title"] = "Disciples";
 }
 
-<h3>Danh Sách Đồng Tu</h3>
-
-<p>&nbsp;</p>
+<h4>Danh Sách Đồng Tu</h4>
+<hr />
 <form asp-page="./Index" method="get">
     <div class="form-actions no-color">
         <div class="form-row">
             <div class="col">
-                <input type="text" name="SearchString" class="form-control" value="@Model.CurrentFilter" placeholder="Tên . Lớp . Số ĐT " />
+                <input type="text" name="SearchString" class="form-control" value="@Model.CurrentFilter" placeholder="Tên . Lớp . Số ĐT" />
             </div>
             <div class="col">
                 <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> Tìm</button> |
@@ -36,10 +35,10 @@
                 </a>
             </th>
             <th>Thọ Pháp</th>
-            <th>
-                <div class="col">
-                    <a asp-page="./Create" class="btn-outline btn-outline-secondary mb-2"><i class="fa fa-plus"></i>&nbsp;Thêm Mới</a>
-                </div>
+            <th class="col-function">
+                <a asp-page="./Create" title="Thêm Mới" class="btn btn-sm btn-outline btn-outline-primary mb-2 func-icon">
+                    <span class="fa fa-plus"></span>
+                </a>
             </th>
         </tr>
     </thead>
@@ -59,14 +58,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.InitiateDate)
             </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID" title="Cập Nhật" class="btn btn-group btn-outline-info mb-2">
+            <td class="col-function">
+                <a asp-page="./Edit" asp-route-id="@item.ID" title="Cập Nhật" class="btn btn-group btn-outline-info mb-2 func-icon">
                     <span class="fa fa-edit"></span>
                 </a>
-                <a asp-page="./Details" asp-route-id="@item.ID" title="Chi Tiết" class="btn btn-group btn-outline-primary mb-2">
+                <a asp-page="./Details" asp-route-id="@item.ID" title="Chi Tiết" class="btn btn-group btn-outline-success mb-2 func-icon">
                     <span class="fa fa-eye" aria-hidden="true"></span>
                 </a>
-                <a asp-page="./Delete" asp-route-id="@item.ID" title="Xóa" class="btn btn-group btn-outline-danger mb-2">
+                <a asp-page="./Delete" asp-route-id="@item.ID" title="Xóa" class="btn btn-group btn-outline-danger mb-2 func-icon">
                     <span class="fa fa-trash" aria-hidden="true"></span>
                 </a>
             </td>
