@@ -59,10 +59,10 @@
     });
 });
 
-
-
 $(function () {
-    $("#btnSubmit").click(function () {
+    $("#btnSubmit").on('click', function (evt) {
+        evt.preventDefault();
+
         initialDate = new Date(
             $("#initiateDate").datetimepicker("viewDate")._d.getFullYear(),
             $("#initiateDate").datetimepicker("viewDate")._d.getMonth(),
@@ -88,6 +88,34 @@ $(function () {
         );
         $("#RegistrationInfo_EndTime").val(endTime.toUTCString());
 
-        this.form.submit()
+        if ($("form").valid()) {
+            $.ajax({
+                type: "POST",
+                url: "./index",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                data: $("form").serialize(),
+                success: function (result) {
+                    if (result.success) {
+                        Swal.fire({
+                            title: '<h5>Đăng ký thiền tại gia thành công</h5>',
+                            width: 350,
+                            icon: 'success',
+                        }).then((result) => {
+                            location.reload(true);
+                        });
+                    } else {
+                        Swal.fire({
+                            title: '<h5>Đăng ký không thành công!</h5>',
+                            text: result.message,
+                            width: 350,
+                            icon: 'error',
+                        })
+                    }
+                }
+            });
+        }
     })
 }); 

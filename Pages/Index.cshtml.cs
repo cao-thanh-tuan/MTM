@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -31,25 +32,19 @@ namespace MTM.Pages
 
         public string DataPoints { get; set; }
 
-        public bool IsSuccess { get; set; }
-
         public IActionResult OnGet()
         {
-            FillChartData();
+            var data = _context.DataPoints.FromSqlRaw("CountByWeekReport").ToList();
+            DataPoints = JsonConvert.SerializeObject(data);
 
             return Page();
         }
 
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
-            FillChartData();
-
-            IsSuccess = false;
             if (!ModelState.IsValid)
             {
-                return Page();
+                return new JsonResult(new { Success = false, Message = "Thông tin đăng ký không hợp lệ!" });
             }
 
             var initiateDate = Convert.ToDateTime(RegistrationInfo.InitiateDate);
@@ -75,21 +70,12 @@ namespace MTM.Pages
                 };
 
                 disciple.MeditaionRegisters.Add(registration);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
 
-                IsSuccess = true;
-            } else
-            {
-                ModelState.AddModelError(string.Empty, "Không tìm thấy số điện thoại với ngày thọ pháp");
+                return new JsonResult(new { Success = true, Message = "Đăng ký thiền tại gia thành công!" });
             }
 
-            return Page();
-        }
-
-        private void FillChartData()
-        {
-            var data = _context.DataPoints.FromSqlRaw("CountByWeekReport").ToList();
-            DataPoints = JsonConvert.SerializeObject(data);
+            return new JsonResult(new { Success = false, Message = "Không tìm thấy số điện thoại với ngày thọ pháp!" });
         }
     }
 }
