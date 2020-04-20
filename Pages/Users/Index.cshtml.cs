@@ -73,11 +73,6 @@ namespace MTM.Pages.Users
             Users = await PaginatedList<User>.CreateAsync(userIQ, pageIndex ?? 1, Common.PAGE_SIZE);
         }
 
-        //public JsonResult OnPost()
-        //{
-        //    return new JsonResult({ StatusCode = });
-        //}
-
         public IActionResult OnPostChangePassword()
         {
             User postData = null;
@@ -99,7 +94,9 @@ namespace MTM.Pages.Users
             }
 
             var currentUser = _context.Users.FirstOrDefault(e => e.Username == postData.Username);
-            if (currentUser == null)
+            if (currentUser == null ||
+               //other user cannot change amdin's password
+               (HttpContext.User.Identity.Name != Common.ADMIN_USER && currentUser.Username == Common.ADMIN_USER))
             {
                 return new JsonResult(false);
             }
@@ -140,7 +137,11 @@ namespace MTM.Pages.Users
                 }
             }
 
-            var currentUser = _context.Users.FirstOrDefault(e => e.Username == postData.Username);
+            //Don't allow delete admin and login user
+            var currentUser = _context.Users.FirstOrDefault(e => 
+                                            e.Username == postData.Username &&
+                                            e.Username != Common.ADMIN_USER &&
+                                            e.Username != HttpContext.User.Identity.Name);
             if (currentUser == null)
             {
                 return new JsonResult(false);

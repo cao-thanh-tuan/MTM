@@ -1,18 +1,21 @@
 ﻿@page
 @model MTM.Pages.Classes.IndexModel
-
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery antiforgery
 @{
     ViewData["Title"] = "Classes";
 }
 
+<script src="~/js/class.js"></script>
+
 <h4>Danh Sách Lớp</h4>
 
 <hr />
+<input hidden name="__RequestVerificationToken" value="@antiforgery.GetAndStoreTokens(HttpContext).RequestToken" />
 <form asp-page="./Index" method="get">
     <div class="form-actions no-color">
         <div class="form-row">
             <div class="col">
-                <input type="text" name="SearchString" class="form-control" value="@Model.CurrentFilter" placeholder="Tên . Thành Phố " />
+                <input type="text" name="SearchString" class="form-control" value="@Model.CurrentFilter" placeholder="Tên . Thành Phố " autofocus />
             </div>
             <div class="col">
                 <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> Tìm</button> |
@@ -58,9 +61,9 @@
                     <a asp-page="./Details" asp-route-id="@item.ID" title="Chi Tiết" class="btn btn-group btn-outline-success mb-2 func-icon">
                         <span class="fa fa-eye" aria-hidden="true"></span>
                     </a>
-                    <a asp-page="./Delete" asp-route-id="@item.ID" title="Xóa" class="btn btn-group btn-outline-danger mb-2 func-icon">
-                        <span class="fa fa-trash" aria-hidden="true"></span>
-                    </a>
+                    <button id="btnDelete_@item.ID" name="@item.Name" value="@item.ID" title="Xóa" class="btn btn-group btn-outline-danger mb-2 func-icon">
+                        <span class="fa fa-trash"></span>
+                    </button>
                 </td>
             </tr>
         }

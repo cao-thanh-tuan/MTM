@@ -48,13 +48,13 @@
                             Swal.fire({
                                 title: '<h5>Cập nhật mật khẩu thành công</h5>',
                                 width: 350,
-                                icon: 'success',
+                                type: 'success',
                             })
                         } else {
                             Swal.fire({
                                 title: '<h5>Cập nhật mật khẩu không thành công!</h5>',
                                 width: 350,
-                                icon: 'error',
+                                type: 'error',
                             })
                         }
                     }
@@ -68,7 +68,7 @@
         var username = $(this).prop("value");
 
         Swal.fire({
-            icon: 'warning',
+            type: 'warning',
             title: '<h5>Bạn có chắc muốn xóa người dùng ' + username + '?</h5>',
             width: 350,
             showCancelButton: true,
@@ -95,7 +95,7 @@
                             Swal.fire({
                                 title: '<h5>Xóa thông tin người dùng thành công</h5>',
                                 width: 350,
-                                icon: 'success',
+                                type: 'success',
                             }).then((result) => {
                                 location.reload(true);
                             });
@@ -103,7 +103,7 @@
                             Swal.fire({
                                 title: '<h5>Xóa thông tin người dùng không thành công!</h5>',
                                 width: 350,
-                                icon: 'error',
+                                type: 'error',
                             })
                         }
                     }

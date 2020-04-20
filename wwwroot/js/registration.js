@@ -102,7 +102,7 @@ $(function () {
                         Swal.fire({
                             title: '<h5>Đăng ký thiền tại gia thành công</h5>',
                             width: 350,
-                            icon: 'success',
+                            type: 'success',
                         }).then((result) => {
                             location.reload(true);
                         });
@@ -111,7 +111,7 @@ $(function () {
                             title: '<h5>Đăng ký không thành công!</h5>',
                             text: result.message,
                             width: 350,
-                            icon: 'error',
+                            type: 'error',
                         })
                     }
                 }

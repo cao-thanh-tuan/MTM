@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using MTM.Models;
+using Newtonsoft.Json;
+using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using MTM.Data;
-using MTM.Models;
 
 namespace MTM.Pages.Classes
 {
@@ -71,6 +70,43 @@ namespace MTM.Pages.Classes
             }
 
             Classes = await PaginatedList<Class>.CreateAsync(classIQ, pageIndex ?? 1, Common.PAGE_SIZE);
+        }
+
+        public IActionResult OnGetCanDelete(int id)
+        {
+            return new JsonResult(!_context.Disciples.Any(d => d.ClassID == id));
+        }
+
+        public IActionResult OnPostDelete()
+        {
+            Class postData = null;
+            MemoryStream stream = new MemoryStream();
+            Request.Body.CopyTo(stream);
+            stream.Position = 0;
+
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string requestBody = reader.ReadToEnd();
+                if (requestBody.Length > 0)
+                {
+                    postData = JsonConvert.DeserializeObject<Class>(requestBody);
+                    if (postData == null)
+                    {
+                        return new JsonResult(false);
+                    }
+                }
+            }
+
+            var currentClass = _context.Classes.FirstOrDefault(c => c.ID == postData.ID);
+            if (currentClass == null)
+            {
+                return new JsonResult(false);
+            }
+
+            _context.Classes.Remove(currentClass);
+            _context.SaveChanges();
+
+            return new JsonResult(true);
         }
     }
 }
