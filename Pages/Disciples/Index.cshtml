@@ -11,7 +11,7 @@
     <div class="form-actions no-color">
         <div class="form-row">
             <div class="col">
-                <input type="text" name="SearchString" class="form-control" value="@Model.CurrentFilter" placeholder="Tên . Lớp . Số ĐT" autofocus/>
+                <input type="text" name="SearchString" class="form-control" value="@Model.CurrentFilter" placeholder="Tên . Lớp . Số ĐT" autofocus />
             </div>
             <div class="col">
                 <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> Tìm</button> |
@@ -45,31 +45,31 @@
     <tbody>
         @foreach (var item in Model.Disciples)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Class.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InitiateDate)
-            </td>
-            <td class="col-function">
-                <a asp-page="./Edit" asp-route-id="@item.ID" title="Cập Nhật" class="btn btn-group btn-outline-info mb-2 func-icon">
-                    <span class="fa fa-edit"></span>
-                </a>
-                <a asp-page="./Details" asp-route-id="@item.ID" title="Chi Tiết" class="btn btn-group btn-outline-success mb-2 func-icon">
-                    <span class="fa fa-eye" aria-hidden="true"></span>
-                </a>
-                <a asp-page="./Delete" asp-route-id="@item.ID" title="Xóa" class="btn btn-group btn-outline-danger mb-2 func-icon">
-                    <span class="fa fa-trash" aria-hidden="true"></span>
-                </a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Class.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InitiateDate)
+                </td>
+                <td class="col-function">
+                    <a asp-page="./Edit" asp-route-id="@item.ID" title="Cập Nhật" class="btn btn-group btn-outline-info mb-2 func-icon">
+                        <span class="fa fa-edit"></span>
+                    </a>
+                    <a asp-page="./Details" asp-route-id="@item.ID" title="Chi Tiết" class="btn btn-group btn-outline-success mb-2 func-icon">
+                        <span class="fa fa-eye" aria-hidden="true"></span>
+                    </a>
+                    <a asp-page="./Delete" asp-route-id="@item.ID" title="Xóa" class="btn btn-group btn-outline-danger mb-2 func-icon">
+                        <span class="fa fa-trash" aria-hidden="true"></span>
+                    </a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
@@ -79,17 +79,18 @@
     var nextDisabled = !Model.Disciples.HasNextPage ? "disabled" : "";
 }
 
-<a asp-page="./Index"
-   asp-route-sortOrder="@Model.CurrentSort"
-   asp-route-pageIndex="@(Model.Disciples.PageIndex - 1)"
-   asp-route-currentFilter="@Model.CurrentFilter"
-   class="btn btn-primary @prevDisabled">
-    Trang trước
-</a>
-<a asp-page="./Index"
-   asp-route-sortOrder="@Model.CurrentSort"
-   asp-route-pageIndex="@(Model.Disciples.PageIndex + 1)"
-   asp-route-currentFilter="@Model.CurrentFilter"
-   class="btn btn-primary @nextDisabled">
-    Trang sau
-</a>
+@if (Model.Disciples.HasPreviousPage || Model.Disciples.HasNextPage)
+{
+    <a asp-page="./Index"
+       asp-route-sortOrder="@Model.CurrentSort"
+       asp-route-pageIndex="@(Model.Disciples.PageIndex - 1)"
+       asp-route-currentFilter="@Model.CurrentFilter"
+       class="btn btn-outline-primary fa fa-long-arrow-left @prevDisabled" title="Trang trước">
+    </a>
+    <a asp-page="./Index"
+       asp-route-sortOrder="@Model.CurrentSort"
+       asp-route-pageIndex="@(Model.Disciples.PageIndex + 1)"
+       asp-route-currentFilter="@Model.CurrentFilter"
+       class="btn btn-outline-primary fa fa-long-arrow-right @nextDisabled" title="Trang sau">
+    </a>
+}

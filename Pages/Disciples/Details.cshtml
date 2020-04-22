@@ -64,10 +64,10 @@
             @if (Model.MeditaionRegisters.HasPreviousPage || Model.MeditaionRegisters.HasNextPage)
             {
                 <a href="./Details?id=@Model.Disciple.ID&pageIndex=@(Model.MeditaionRegisters.PageIndex - 1)"
-                   class="btn btn-outline-info fa fa-long-arrow-left @prevDisabled" title="Trang trước">
+                   class="btn btn-outline-primary fa fa-long-arrow-left @prevDisabled" title="Trang trước">
                 </a>
                 <a href="./Details?id=@Model.Disciple.ID&pageIndex=@(Model.MeditaionRegisters.PageIndex + 1)"
-                   class="btn btn-outline-info fa fa-long-arrow-right @nextDisabled" title="Trang sau">
+                   class="btn btn-outline-primary fa fa-long-arrow-right @nextDisabled" title="Trang sau">
                 </a>
             }
         </dd>
