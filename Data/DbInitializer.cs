@@ -19,6 +19,12 @@ namespace MTM.Data
                         Username = "admin", 
                         Password = "AQAAAAEAACcQAAAAEKc4o3h+VVDeoSd4HaCZrklOQRjwNHSuSK79Vbn27nTTIAKC2UAdmRA5J74SHibrVg==" 
                     });
+                context.Users.Add(
+                    new User
+                    {
+                        Username = "admin2",
+                        Password = "AQAAAAEAACcQAAAAEKc4o3h+VVDeoSd4HaCZrklOQRjwNHSuSK79Vbn27nTTIAKC2UAdmRA5J74SHibrVg=="
+                    });
                 context.SaveChanges();
             }
 

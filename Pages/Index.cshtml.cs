@@ -34,7 +34,7 @@ namespace MTM.Pages
 
         public IActionResult OnGet()
         {
-            var data = _context.DataPoints.FromSqlRaw("CountByWeekReport").ToList();
+            var data = _context.DataPoints.FromSqlRaw("dbo.CountByWeekReport").ToList();
             DataPoints = JsonConvert.SerializeObject(data);
 
             return Page();

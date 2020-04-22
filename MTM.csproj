@@ -5,6 +5,9 @@
     <UserSecretsId>700878b6-9b8b-4bcb-8181-ce4582baf0d0</UserSecretsId>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
+    <Product>Meditation Time Management</Product>
+    <Company>SM</Company>
+    <Authors>Tuan Cao</Authors>
   </PropertyGroup>
 
   <ItemGroup>

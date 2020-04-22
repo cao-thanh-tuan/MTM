@@ -36,7 +36,7 @@ namespace MTM.Pages.Users
         [Display(Name = "Mật Khẩu Mới")]
         public string NewPassword { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
+        public IActionResult OnGet()
         {
             if (!HttpContext.User.Identity.IsAuthenticated)
             {

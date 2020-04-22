@@ -33,7 +33,11 @@
     
     <form method="post">
         <input type="hidden" asp-for="Registration.ID" />
-        <input type="submit" value="Xóa" class="btn btn-danger" /> |
-        <a asp-page="../Disciples/Details" asp-route-id="@Model.Registration.Disciple.ID">Quay Về</a>
+        <div class="form-group">
+            <button type="submit" class="btn btn-danger mb-2"><i class="fa fa-trash">&nbsp;</i>&nbsp;Xóa</button>
+        </div>
+        <div>
+            <a asp-page="../Disciples/Details" asp-route-id="@Model.Registration.Disciple.ID" class="fa fa-reply btn-outline-secondary">&nbsp;Quay Về</a>
+        </div>
     </form>
 </div>
