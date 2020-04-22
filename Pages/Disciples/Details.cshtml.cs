@@ -12,11 +12,13 @@ namespace MTM.Pages.Disciples
 {
     public class DetailsModel : DiscipleBasePageModel
     {
+        public PaginatedList<Registration> MeditaionRegisters { get; set; }
+
         public DetailsModel(MTMContext context) : base(context)
         {
         }
         
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id, int? pageIndex)
         {
             if (id == null)
             {
@@ -29,12 +31,15 @@ namespace MTM.Pages.Disciples
                 .AsNoTracking()
                 .FirstOrDefaultAsync(d => d.ID == id);
 
-            Disciple.MeditaionRegisters = Disciple.MeditaionRegisters.OrderByDescending(m => m.FromTime).ToList();
+            MeditaionRegisters = PaginatedList<Registration>.Create(
+                Disciple.MeditaionRegisters.OrderByDescending(m => m.FromTime).AsQueryable<Registration>(),
+                pageIndex ?? 1, Common.PAGE_SIZE);
 
             if (Disciple == null)
             {
                 return NotFound();
             }
+
             return Page();
         }
     }
