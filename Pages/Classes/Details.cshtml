@@ -5,6 +5,11 @@
     ViewData["Title"] = "Class";
 }
 
+@{
+    var prevDisabled = !Model.Disciples.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Disciples.HasNextPage ? "disabled" : "";
+}
+
 <h4>Thông Tin Lớp</h4>
 
 <div>
@@ -26,6 +31,15 @@
             Danh Sách Lớp
         </dt>
         <dd class="col-sm-10">
+            @if (Model.Disciples.HasPreviousPage || Model.Disciples.HasNextPage)
+            {
+                <a href="./Details?id=@Model.Class.ID&pageIndex=@(Model.Disciples.PageIndex - 1)"
+                   class="btn btn-outline-primary fa fa-long-arrow-left @prevDisabled" title="Trang trước">
+                </a>
+                <a href="./Details?id=@Model.Class.ID&pageIndex=@(Model.Disciples.PageIndex + 1)"
+                   class="btn btn-outline-primary fa fa-long-arrow-right @nextDisabled" title="Trang sau">
+                </a>
+            }
         </dd>
         <dd class="col-sm-10">
             <table class="table">
@@ -35,7 +49,7 @@
                     <th>Số Điện Thoại</th>
                     <th></th>
                 </tr>
-                @foreach (var item in Model.Class.Disciples.Select((value, i) => new { i, value }))
+                @foreach (var item in Model.Disciples.Select((value, i) => new { i, value }))
                 {
                     <tr>
                         <td>

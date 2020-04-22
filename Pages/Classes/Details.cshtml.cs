@@ -12,11 +12,13 @@ namespace MTM.Pages.Classes
 {
     public class DetailsModel : ClassBasePageModel
     {
+        public PaginatedList<Disciple> Disciples { get; set; }
+
         public DetailsModel(MTMContext context) : base(context)
         {
         }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id, int? pageIndex)
         {
             if (id == null)
             {
@@ -28,7 +30,9 @@ namespace MTM.Pages.Classes
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
 
-            Class.Disciples = Class.Disciples.OrderBy(d => d.FirstName).ToList();
+            Disciples = PaginatedList<Disciple>.Create(
+                Class.Disciples.OrderBy(d => d.FirstName).AsQueryable<Disciple>(),
+                pageIndex ?? 1, Common.PAGE_SIZE);
 
             if (Class == null)
             {
